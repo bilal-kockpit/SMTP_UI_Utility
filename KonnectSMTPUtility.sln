@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KonnectSMTPUtility", "KonnectSMTPUtility\KonnectSMTPUtility.csproj", "{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F0025B2A-92EC-47D7-983E-30A722E73968}
+	EndGlobalSection
+EndGlobal
