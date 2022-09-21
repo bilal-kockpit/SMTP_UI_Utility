@@ -5,16 +5,30 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KonnectSMTPUtility", "KonnectSMTPUtility\KonnectSMTPUtility.csproj", "{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SMTPUtilitySetup", "SMTPUtilitySetup\SMTPUtilitySetup.wixproj", "{DBDF70BF-E933-4D12-A270-097CA34AA96F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Debug|x86.Build.0 = Debug|Any CPU
 		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Release|x86.ActiveCfg = Release|Any CPU
+		{8D192A8A-ADDE-4EC0-8FB2-607B1768795C}.Release|x86.Build.0 = Release|Any CPU
+		{DBDF70BF-E933-4D12-A270-097CA34AA96F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{DBDF70BF-E933-4D12-A270-097CA34AA96F}.Debug|x86.ActiveCfg = Debug|x86
+		{DBDF70BF-E933-4D12-A270-097CA34AA96F}.Debug|x86.Build.0 = Debug|x86
+		{DBDF70BF-E933-4D12-A270-097CA34AA96F}.Release|Any CPU.ActiveCfg = Release|x86
+		{DBDF70BF-E933-4D12-A270-097CA34AA96F}.Release|x86.ActiveCfg = Release|x86
+		{DBDF70BF-E933-4D12-A270-097CA34AA96F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

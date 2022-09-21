@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define KonnectSMTPUtility_TargetDir=$(var.KonnectSMTPUtility.TargetDir)?>
+	<Product Id="*" Name="KonnectSMTP" Language="1033" Version="1.0.0.0" Manufacturer="Kockpit Analytics Pvt.Ltd." UpgradeCode="9348d17c-7c52-4f7c-8717-081b84c2fa53">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+		<MediaTemplate EmbedCab="yes" />
+		<UIRef Id="WixUI_Minimal" />
+		
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		
+
+
+		<!-- Add installer icon -->
+		<Icon Id="ShortCutIcon" SourceFile="$(var.ProjectDir)\logo.ico" />
+		<Property Id="ARPPRODUCTICON" Value="ShortCutIcon" />
+		
+		<!--<WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\License.rtf" />-->
+		<WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)\K2.png" />
+		<WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)\K1.png" />
+
+		<Feature Id="ProductFeature" Title="KonnectSMTP" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="Resources_Service_files" />
+			<ComponentGroupRef Id="Resources_Service_runtimes_win_lib_netstandard2.0_files" />
+			<ComponentGroupRef Id="Resources_Service_runtimes_win_lib_netcoreapp2.1_files" />
+			<ComponentGroupRef Id="Resources_Service_runtimes_win_lib_netcoreapp2.0_files" />
+			<ComponentGroupRef Id="Resources_Service_runtimes_unix_lib_netcoreapp2.1_files" />
+
+			<ComponentRef Id="ApplicationShortcut" />
+			<ComponentGroupRef Id="ComponentGroupDesktopShortcut" />
+		</Feature>
+
+		<DirectoryRef Id="ApplicationProgramsFolder">
+			<Component Id="ApplicationShortcut" Guid="41cdba80-edb9-4d71-8157-95527beb73a2">
+				<Shortcut Id="ApplicationStartMenuShortcut" Name="KonnectSMTP" Description="SMTP Utility" Target="[INSTALLFOLDER]KonnectSMTPUtility.exe" WorkingDirectory="INSTALLFOLDER" Icon="ShortCutIcon" />
+				<RemoveFolder Id="CleanUpShortCut" Directory="ApplicationProgramsFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\Kockpit Analytics\KonnectSMTP\ProgramMenuShortcut" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+		</DirectoryRef>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="KonnectSMTP">
+				  <Directory Id="Resources" Name="Resources">
+				    <Directory Id="Resources_Service" Name="Service">
+				      <Directory Id="Resources_Service_runtimes" Name="runtimes">
+				        <Directory Id="Resources_Service_runtimes_unix" Name="unix">
+				          <Directory Id="Resources_Service_runtimes_unix_lib" Name="lib">
+				            <Directory Id="Resources_Service_runtimes_unix_lib_netcoreapp2.1" Name="netcoreapp2.1" />
+				          </Directory>
+				        </Directory>
+				        <Directory Id="Resources_Service_runtimes_win" Name="win">
+				          <Directory Id="Resources_Service_runtimes_win_lib" Name="lib">
+				            <Directory Id="Resources_Service_runtimes_win_lib_netcoreapp2.0" Name="netcoreapp2.0" />
+				            <Directory Id="Resources_Service_runtimes_win_lib_netcoreapp2.1" Name="netcoreapp2.1" />
+				            <Directory Id="Resources_Service_runtimes_win_lib_netstandard2.0" Name="netstandard2.0" />
+				          </Directory>
+				        </Directory>
+				      </Directory>
+				    </Directory>
+				  </Directory>
+				</Directory>
+			</Directory>
+
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="ApplicationProgramsFolder" Name="!(bind.property.Manufacturer)" />
+			</Directory>
+			<Directory Id="DesktopFolder" Name="DesktopFolder" />
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+			<Component Id="KonnectSMTPUtility.exe" Guid="3ddb43d8-dd21-427d-9261-2e0bb0bb3e94">
+			  <File Id="KonnectSMTPUtility.exe" Name="KonnectSMTPUtility.exe" Source="$(var.KonnectSMTPUtility_TargetDir)KonnectSMTPUtility.exe" />
+			</Component>
+			<Component Id="KonnectSMTPUtility.exe.config" Guid="7bedb76a-bf09-4b44-bccd-f29db3d63961">
+			  <File Id="KonnectSMTPUtility.exe.config" Name="KonnectSMTPUtility.exe.config" Source="$(var.KonnectSMTPUtility_TargetDir)KonnectSMTPUtility.exe.config" />
+			</Component>
+			<Component Id="System.Text.Json.dll" Guid="0b4e0516-ee18-4f4e-aa71-b9641c44b9d1">
+			  <File Id="System.Text.Json.dll" Name="System.Text.Json.dll" Source="$(var.KonnectSMTPUtility_TargetDir)System.Text.Json.dll" />
+			</Component>
+			<Component Id="System.Management.Automation.dll" Guid="2a2f720b-5d44-48c8-ae84-91f15da8ec2e">
+			  <File Id="System.Management.Automation.dll" Name="System.Management.Automation.dll" Source="$(var.KonnectSMTPUtility_TargetDir)System.Management.Automation.dll" />
+			</Component>
+			<Component Id="Microsoft.Extensions.Configuration.dll" Guid="2b6b0ab3-b5ec-4431-bbac-1b4e4e662ddf">
+			  <File Id="Microsoft.Extensions.Configuration.dll" Name="Microsoft.Extensions.Configuration.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Microsoft.Extensions.Configuration.dll" />
+			</Component>
+			<Component Id="Microsoft.Extensions.Configuration.FileExtensions.dll" Guid="56ed1e78-3de0-43f4-9cd7-98895c99094e">
+			  <File Id="Microsoft.Extensions.Configuration.FileExtensions.dll" Name="Microsoft.Extensions.Configuration.FileExtensions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Microsoft.Extensions.Configuration.FileExtensions.dll" />
+			</Component>
+			<Component Id="Microsoft.Extensions.Configuration.Abstractions.dll" Guid="b3a292e4-54f7-4c78-b1c1-8eb348b0a97e">
+			  <File Id="Microsoft.Extensions.Configuration.Abstractions.dll" Name="Microsoft.Extensions.Configuration.Abstractions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Microsoft.Extensions.Configuration.Abstractions.dll" />
+			</Component>
+			<Component Id="Microsoft.Extensions.Configuration.Json.dll" Guid="f69953a7-9b08-4a64-84ba-5f096fe73e07">
+			  <File Id="Microsoft.Extensions.Configuration.Json.dll" Name="Microsoft.Extensions.Configuration.Json.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Microsoft.Extensions.Configuration.Json.dll" />
+			</Component>
+			<Component Id="Microsoft.Extensions.Configuration.Binder.dll" Guid="babd9616-3291-4a40-874d-c4d245f404cb">
+			  <File Id="Microsoft.Extensions.Configuration.Binder.dll" Name="Microsoft.Extensions.Configuration.Binder.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Microsoft.Extensions.Configuration.Binder.dll" />
+			</Component>
+			<Component Id="System.Memory.dll" Guid="6efc1e2d-7220-4b15-960d-dec2c9fab0aa">
+			  <File Id="System.Memory.dll" Name="System.Memory.dll" Source="$(var.KonnectSMTPUtility_TargetDir)System.Memory.dll" />
+			</Component>
+			<Component Id="System.Numerics.Vectors.dll" Guid="ba4a12ca-0cb7-4ed0-a482-98246f0c5306">
+			  <File Id="System.Numerics.Vectors.dll" Name="System.Numerics.Vectors.dll" Source="$(var.KonnectSMTPUtility_TargetDir)System.Numerics.Vectors.dll" />
+			</Component>
+			<Component Id="System.Runtime.CompilerServices.Unsafe.dll" Guid="c2ea7466-70fe-4502-a67c-094a0f69e731">
+			  <File Id="System.Runtime.CompilerServices.Unsafe.dll" Name="System.Runtime.CompilerServices.Unsafe.dll" Source="$(var.KonnectSMTPUtility_TargetDir)System.Runtime.CompilerServices.Unsafe.dll" />
+			</Component>
+			<Component Id="System.Buffers.dll" Guid="d9ad3237-60da-43c3-b6dc-09c119d4b14f">
+			  <File Id="System.Buffers.dll" Name="System.Buffers.dll" Source="$(var.KonnectSMTPUtility_TargetDir)System.Buffers.dll" />
+			</Component>
+			<Component Id="System.Text.Encodings.Web.dll" Guid="a1f87127-c564-40e9-862b-7c711411d38f">
+			  <File Id="System.Text.Encodings.Web.dll" Name="System.Text.Encodings.Web.dll" Source="$(var.KonnectSMTPUtility_TargetDir)System.Text.Encodings.Web.dll" />
+			</Component>
+			<Component Id="System.ValueTuple.dll" Guid="338f4395-e70b-4cef-b187-c9b6c3b8588d">
+			  <File Id="System.ValueTuple.dll" Name="System.ValueTuple.dll" Source="$(var.KonnectSMTPUtility_TargetDir)System.ValueTuple.dll" />
+			</Component>
+			<Component Id="System.Threading.Tasks.Extensions.dll" Guid="de543ef1-9a77-4be9-b4b3-580009de9dd9">
+			  <File Id="System.Threading.Tasks.Extensions.dll" Name="System.Threading.Tasks.Extensions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)System.Threading.Tasks.Extensions.dll" />
+			</Component>
+			<Component Id="Microsoft.Bcl.AsyncInterfaces.dll" Guid="8324f012-9077-4abe-b4b8-7f94a88cb8f5">
+			  <File Id="Microsoft.Bcl.AsyncInterfaces.dll" Name="Microsoft.Bcl.AsyncInterfaces.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Microsoft.Bcl.AsyncInterfaces.dll" />
+			</Component>
+			<Component Id="Microsoft.Extensions.Primitives.dll" Guid="08908142-0b97-4e2a-8df9-d82f16714d28">
+			  <File Id="Microsoft.Extensions.Primitives.dll" Name="Microsoft.Extensions.Primitives.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Microsoft.Extensions.Primitives.dll" />
+			</Component>
+			<Component Id="Microsoft.Extensions.FileProviders.Abstractions.dll" Guid="0c30ba9e-1582-4f83-994b-c790b9e62b9c">
+			  <File Id="Microsoft.Extensions.FileProviders.Abstractions.dll" Name="Microsoft.Extensions.FileProviders.Abstractions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Microsoft.Extensions.FileProviders.Abstractions.dll" />
+			</Component>
+			<Component Id="Microsoft.Extensions.FileProviders.Physical.dll" Guid="e6023218-1ef6-4093-81e4-5739c300f1ed">
+			  <File Id="Microsoft.Extensions.FileProviders.Physical.dll" Name="Microsoft.Extensions.FileProviders.Physical.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Microsoft.Extensions.FileProviders.Physical.dll" />
+			</Component>
+			<Component Id="Microsoft.Extensions.FileSystemGlobbing.dll" Guid="c27ce4b6-852e-4140-83c1-e3e644fe9102">
+			  <File Id="Microsoft.Extensions.FileSystemGlobbing.dll" Name="Microsoft.Extensions.FileSystemGlobbing.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Microsoft.Extensions.FileSystemGlobbing.dll" />
+			</Component>
+			<Component Id="System.Security.Cryptography.Algorithms.dll" Guid="b8fd86bf-3dae-4efb-b20c-3aa56b68745a">
+			  <File Id="System.Security.Cryptography.Algorithms.dll" Name="System.Security.Cryptography.Algorithms.dll" Source="$(var.KonnectSMTPUtility_TargetDir)System.Security.Cryptography.Algorithms.dll" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+	<Fragment>
+	  <ComponentGroup Id="Resources_Service_files" Directory="Resources_Service">
+	    <Component Id="Resources_Service_KockpitUtility.dll" Guid="09d7e4be-bd00-459a-a054-57a0857af54d">
+	      <File Id="Resources_Service_KockpitUtility.dll" Name="KockpitUtility.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\KockpitUtility.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_System.Diagnostics.EventLog.dll" Guid="5ffbe44a-0c91-4245-8082-ee487ac9e811">
+	      <File Id="Resources_Service_System.Diagnostics.EventLog.dll" Name="System.Diagnostics.EventLog.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\System.Diagnostics.EventLog.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_System.IO.FileSystem.AccessControl.dll" Guid="915801b9-09d5-418e-a0ee-b816fb0e9ad8">
+	      <File Id="Resources_Service_System.IO.FileSystem.AccessControl.dll" Name="System.IO.FileSystem.AccessControl.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\System.IO.FileSystem.AccessControl.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_System.Security.AccessControl.dll" Guid="93479f6b-2c1d-4446-bbf3-aa5f3dee31d0">
+	      <File Id="Resources_Service_System.Security.AccessControl.dll" Name="System.Security.AccessControl.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\System.Security.AccessControl.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_System.Security.Principal.Windows.dll" Guid="3525756a-f977-42c3-86a7-46c8e569c636">
+	      <File Id="Resources_Service_System.Security.Principal.Windows.dll" Name="System.Security.Principal.Windows.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\System.Security.Principal.Windows.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_System.ServiceProcess.ServiceController.dll" Guid="7bc2daf0-e63f-4ed7-a873-c89428409a8d">
+	      <File Id="Resources_Service_System.ServiceProcess.ServiceController.dll" Name="System.ServiceProcess.ServiceController.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\System.ServiceProcess.ServiceController.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_websocket_sharp_core.dll" Guid="8ed2c7f2-2607-4ab0-8d31-06f28303ea70">
+	      <File Id="Resources_Service_websocket_sharp_core.dll" Name="websocket-sharp-core.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\websocket-sharp-core.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_WorkerService1.dll" Guid="ad1d05e2-1852-4b49-831b-41cf511848f1">
+	      <File Id="Resources_Service_WorkerService1.dll" Name="WorkerService1.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\WorkerService1.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_WorkerService1.exe" Guid="8ef30723-afd3-4679-93fb-6a78a3eca4f4">
+	      <File Id="Resources_Service_WorkerService1.exe" Name="WorkerService1.exe" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\WorkerService1.exe" />
+	    </Component>
+	    <Component Id="Resources_Service_WorkerService1.pdb" Guid="a301fc53-02c8-4515-a86b-ec4bfb7a49ae">
+	      <File Id="Resources_Service_WorkerService1.pdb" Name="WorkerService1.pdb" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\WorkerService1.pdb" />
+	    </Component>
+	    <Component Id="Resources_Service_KockpitUtility.pdb" Guid="314282e2-ee48-427c-82aa-491839793a16">
+	      <File Id="Resources_Service_KockpitUtility.pdb" Name="KockpitUtility.pdb" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\KockpitUtility.pdb" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Configuration.Abstractions.dll" Guid="3314bfd7-4356-41ef-8815-79ee9e78f607">
+	      <File Id="Resources_Service_Microsoft.Extensions.Configuration.Abstractions.dll" Name="Microsoft.Extensions.Configuration.Abstractions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Configuration.Abstractions.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Configuration.Binder.dll" Guid="f19a8b5d-063e-4a80-9ff5-2fca6eba4d20">
+	      <File Id="Resources_Service_Microsoft.Extensions.Configuration.Binder.dll" Name="Microsoft.Extensions.Configuration.Binder.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Configuration.Binder.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Configuration.CommandLine.dll" Guid="7cd9d8e0-e738-43ab-bbcd-e161ab213967">
+	      <File Id="Resources_Service_Microsoft.Extensions.Configuration.CommandLine.dll" Name="Microsoft.Extensions.Configuration.CommandLine.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Configuration.CommandLine.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Configuration.dll" Guid="edbb7dae-e5e5-44c2-bdaf-2b97eea9c517">
+	      <File Id="Resources_Service_Microsoft.Extensions.Configuration.dll" Name="Microsoft.Extensions.Configuration.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Configuration.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Configuration.EnvironmentVariables.dll" Guid="6b94a73d-89cb-44ef-b196-da74fd3c9f83">
+	      <File Id="Resources_Service_Microsoft.Extensions.Configuration.EnvironmentVariables.dll" Name="Microsoft.Extensions.Configuration.EnvironmentVariables.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Configuration.EnvironmentVariables.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Configuration.FileExtensions.dll" Guid="c3c43cd0-eefe-49ec-bc72-94ca8b48ded3">
+	      <File Id="Resources_Service_Microsoft.Extensions.Configuration.FileExtensions.dll" Name="Microsoft.Extensions.Configuration.FileExtensions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Configuration.FileExtensions.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Configuration.Json.dll" Guid="0bfe57a4-febc-45dc-83e6-396dfe5c3cfc">
+	      <File Id="Resources_Service_Microsoft.Extensions.Configuration.Json.dll" Name="Microsoft.Extensions.Configuration.Json.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Configuration.Json.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Configuration.UserSecrets.dll" Guid="224d38b6-dc14-4952-9d97-e2f595ab55f9">
+	      <File Id="Resources_Service_Microsoft.Extensions.Configuration.UserSecrets.dll" Name="Microsoft.Extensions.Configuration.UserSecrets.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Configuration.UserSecrets.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.DependencyInjection.Abstractions.dll" Guid="e4039e36-06c0-4e84-98af-49c6f32130d9">
+	      <File Id="Resources_Service_Microsoft.Extensions.DependencyInjection.Abstractions.dll" Name="Microsoft.Extensions.DependencyInjection.Abstractions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.DependencyInjection.dll" Guid="9a476d3e-4417-4524-8cce-de8a4bcd1aed">
+	      <File Id="Resources_Service_Microsoft.Extensions.DependencyInjection.dll" Name="Microsoft.Extensions.DependencyInjection.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.DependencyInjection.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.FileProviders.Abstractions.dll" Guid="6f7ad80e-928c-4cc9-90ad-f32e50d57234">
+	      <File Id="Resources_Service_Microsoft.Extensions.FileProviders.Abstractions.dll" Name="Microsoft.Extensions.FileProviders.Abstractions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.FileProviders.Abstractions.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.FileProviders.Physical.dll" Guid="a89c9cf7-1115-4b51-b30e-7dfb598c4830">
+	      <File Id="Resources_Service_Microsoft.Extensions.FileProviders.Physical.dll" Name="Microsoft.Extensions.FileProviders.Physical.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.FileProviders.Physical.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.FileSystemGlobbing.dll" Guid="8c10fa1b-fd5f-48f9-9202-eb44ac3276e7">
+	      <File Id="Resources_Service_Microsoft.Extensions.FileSystemGlobbing.dll" Name="Microsoft.Extensions.FileSystemGlobbing.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.FileSystemGlobbing.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Hosting.Abstractions.dll" Guid="6993f1f8-bf4f-410b-ad44-9c9cf79d8fa4">
+	      <File Id="Resources_Service_Microsoft.Extensions.Hosting.Abstractions.dll" Name="Microsoft.Extensions.Hosting.Abstractions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Hosting.Abstractions.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Hosting.WindowsServices.dll" Guid="2490369e-6064-4258-a30e-9267c52e77fd">
+	      <File Id="Resources_Service_Microsoft.Extensions.Hosting.WindowsServices.dll" Name="Microsoft.Extensions.Hosting.WindowsServices.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Hosting.WindowsServices.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Logging.Abstractions.dll" Guid="ccccdad7-2248-453b-874e-b7cd2b7e1aac">
+	      <File Id="Resources_Service_Microsoft.Extensions.Logging.Abstractions.dll" Name="Microsoft.Extensions.Logging.Abstractions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Logging.Abstractions.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Logging.Configuration.dll" Guid="5160d016-a642-405f-a640-fe01a67fc33a">
+	      <File Id="Resources_Service_Microsoft.Extensions.Logging.Configuration.dll" Name="Microsoft.Extensions.Logging.Configuration.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Logging.Configuration.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Logging.Debug.dll" Guid="394d6326-ae71-4cc2-8516-f848f9fe72ca">
+	      <File Id="Resources_Service_Microsoft.Extensions.Logging.Debug.dll" Name="Microsoft.Extensions.Logging.Debug.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Logging.Debug.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Logging.dll" Guid="ba281a2f-ef47-4844-b7e8-eb02c396e47d">
+	      <File Id="Resources_Service_Microsoft.Extensions.Logging.dll" Name="Microsoft.Extensions.Logging.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Logging.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Logging.Console.dll" Guid="45220d96-1e1f-4c41-954e-5ae36dd4bf6b">
+	      <File Id="Resources_Service_Microsoft.Extensions.Logging.Console.dll" Name="Microsoft.Extensions.Logging.Console.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Logging.Console.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Logging.EventLog.dll" Guid="7bb761ec-7fb0-4193-9409-c524d4ae9af8">
+	      <File Id="Resources_Service_Microsoft.Extensions.Logging.EventLog.dll" Name="Microsoft.Extensions.Logging.EventLog.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Logging.EventLog.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Logging.EventSource.dll" Guid="beb307e8-9ac9-4757-8613-bdfb5359e470">
+	      <File Id="Resources_Service_Microsoft.Extensions.Logging.EventSource.dll" Name="Microsoft.Extensions.Logging.EventSource.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Logging.EventSource.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Options.ConfigurationExtensions.dll" Guid="cb9fe37c-9cf5-4f89-b9a6-b5f5e648571b">
+	      <File Id="Resources_Service_Microsoft.Extensions.Options.ConfigurationExtensions.dll" Name="Microsoft.Extensions.Options.ConfigurationExtensions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Options.ConfigurationExtensions.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Options.dll" Guid="61480fd0-9117-4ed5-8074-eca64d6e10fd">
+	      <File Id="Resources_Service_Microsoft.Extensions.Options.dll" Name="Microsoft.Extensions.Options.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Options.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Primitives.dll" Guid="4e10dd33-3eb3-4ac5-b2e8-dffeb91978e9">
+	      <File Id="Resources_Service_Microsoft.Extensions.Primitives.dll" Name="Microsoft.Extensions.Primitives.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Primitives.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Newtonsoft.Json.dll" Guid="30884b16-e26b-43d9-835d-17d860182e87">
+	      <File Id="Resources_Service_Newtonsoft.Json.dll" Name="Newtonsoft.Json.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Newtonsoft.Json.dll" />
+	    </Component>
+	    <Component Id="Resources_Service_Microsoft.Extensions.Hosting.dll" Guid="1196886d-01ff-4546-a8cd-e78111e04174">
+	      <File Id="Resources_Service_Microsoft.Extensions.Hosting.dll" Name="Microsoft.Extensions.Hosting.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Hosting.dll" />
+	    </Component>
+	  </ComponentGroup>
+	</Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="Resources_Service_runtimes_win_lib_netstandard2.0_files" Directory="Resources_Service_runtimes_win_lib_netstandard2.0">
+      <Component Id="Resources_Service_runtimes_win_lib_netstandard2.0_System.ServiceProcess.ServiceController.dll" Guid="73f8b89a-3df4-4106-8ee3-72641bffea41">
+        <File Id="Resources_Service_runtimes_win_lib_netstandard2.0_System.ServiceProcess.ServiceController.dll" Name="System.ServiceProcess.ServiceController.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\runtimes\win\lib\netstandard2.0\System.ServiceProcess.ServiceController.dll" />
+      </Component>
+      <Component Id="Resources_Service_runtimes_win_lib_netstandard2.0_System.IO.FileSystem.AccessControl.dll" Guid="97651690-01fe-467d-933a-376cd13688bb">
+        <File Id="Resources_Service_runtimes_win_lib_netstandard2.0_System.IO.FileSystem.AccessControl.dll" Name="System.IO.FileSystem.AccessControl.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\runtimes\win\lib\netstandard2.0\System.IO.FileSystem.AccessControl.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="Resources_Service_runtimes_win_lib_netcoreapp2.1_files" Directory="Resources_Service_runtimes_win_lib_netcoreapp2.1">
+      <Component Id="Resources_Service_runtimes_win_lib_netcoreapp2.1_System.Security.Principal.Windows.dll" Guid="0b79ccd8-b788-45d2-9080-30bc03e6c074">
+        <File Id="Resources_Service_runtimes_win_lib_netcoreapp2.1_System.Security.Principal.Windows.dll" Name="System.Security.Principal.Windows.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="Resources_Service_runtimes_win_lib_netcoreapp2.0_files" Directory="Resources_Service_runtimes_win_lib_netcoreapp2.0">
+      <Component Id="Resources_Service_runtimes_win_lib_netcoreapp2.0_System.Security.AccessControl.dll" Guid="8afe4429-d31f-47a0-b77c-5fedaa14cad0">
+        <File Id="Resources_Service_runtimes_win_lib_netcoreapp2.0_System.Security.AccessControl.dll" Name="System.Security.AccessControl.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\runtimes\win\lib\netcoreapp2.0\System.Security.AccessControl.dll" />
+      </Component>
+      <Component Id="Resources_Service_runtimes_win_lib_netcoreapp2.0_System.Diagnostics.EventLog.dll" Guid="d9da4e65-ff38-461c-b255-85a475020ba4">
+        <File Id="Resources_Service_runtimes_win_lib_netcoreapp2.0_System.Diagnostics.EventLog.dll" Name="System.Diagnostics.EventLog.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\runtimes\win\lib\netcoreapp2.0\System.Diagnostics.EventLog.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="Resources_Service_runtimes_unix_lib_netcoreapp2.1_files" Directory="Resources_Service_runtimes_unix_lib_netcoreapp2.1">
+      <Component Id="Resources_Service_runtimes_unix_lib_netcoreapp2.1_System.Security.Principal.Windows.dll" Guid="1f2056af-b06f-4a62-85a4-ec86f08b81e4">
+        <File Id="Resources_Service_runtimes_unix_lib_netcoreapp2.1_System.Security.Principal.Windows.dll" Name="System.Security.Principal.Windows.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+	<Fragment>
+		<!--Desktop Shortcut-->
+		<ComponentGroup Id="ComponentGroupDesktopShortcut">
+			<Component Id="ComponentDesktopShortcut" Guid="*" Directory="DesktopFolder">
+				<Shortcut Id="AppDesktopShortcut" Name="KonnectSMTP" Description="KonnectSMTP Application" Directory="DesktopFolder" Target="[INSTALLFOLDER]KonnectSMTPUtility.exe" WorkingDirectory="INSTALLFOLDER" Icon="ShortCutIcon" />
+				<!--Remove desktop shortcut on uninstall-->
+				<RemoveFolder Id="DesktopFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\Kockpit Analytics\KonnectSMTP" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
