@@ -73,7 +73,7 @@ namespace KonnectSMTPUtility
         {
             bool lretval = false;
       
-            var Directorypath = Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory) + "Published";
+            var Directorypath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Service");
             try
             {
                 var config = new ConfigurationBuilder()
@@ -402,7 +402,7 @@ namespace KonnectSMTPUtility
     }
      class Constants
     {
-        public static string DirectoryPath = AppDomain.CurrentDomain.BaseDirectory + "Published";
+        public static string DirectoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Resources", "Service");
         public static string asmPath = Path.Combine(DirectoryPath, "WorkerService1.exe");
         public static string ServiceName = "WorkerService1";
 
