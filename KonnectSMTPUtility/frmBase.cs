@@ -24,7 +24,9 @@ namespace KonnectSMTPUtility
         private void frmBase_Load(object sender, EventArgs e)
         { 
             try
-            {              
+            {
+                //Method 1. center at initilization
+                //Method 2. The manual way                
                 ///btnUpdate.Visible = false;
                 lblCheckVersion.Text = "";
                 lblVersion.Text = "";
