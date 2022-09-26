@@ -30,6 +30,14 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
+    <ProjectReference Include="..\SMTPUtilitySetup.Custom\SMTPUtilitySetup.Custom.csproj">
+      <Name>SMTPUtilitySetup.Custom</Name>
+      <Project>{5bc15e6a-7180-4561-a01b-ade74cdbd895}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WixExtension Include="WixUtilExtension">
