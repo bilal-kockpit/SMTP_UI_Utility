@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define KonnectSMTPUtility_TargetDir=$(var.KonnectSMTPUtility.TargetDir)?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<?define KonnectSMTPUtility_TargetDir=$(var.KonnectSMTPUtility.TargetDir)?>
 	<Product Id="*" Name="KonnectSMTP" Language="1033" Version="1.0.0.0" Manufacturer="Kockpit Analytics Pvt.Ltd." UpgradeCode="9348d17c-7c52-4f7c-8717-081b84c2fa53">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 		<MediaTemplate EmbedCab="yes" />
@@ -37,6 +38,10 @@
 				<RegistryValue Root="HKCU" Key="Software\Kockpit Analytics\KonnectSMTP\ProgramMenuShortcut" Name="installed" Type="integer" Value="1" KeyPath="yes" />
 			</Component>
 		</DirectoryRef>
+
+		<InstallUISequence>
+			<Custom Action="RunPreviledgeCustomAction" Before="PrepareDlg">NOT Installed</Custom>
+		</InstallUISequence>
 	</Product>
 
 	<Fragment>
@@ -301,6 +306,11 @@
       </Component>
     </ComponentGroup>
   </Fragment>
+
+	<Fragment>
+		<Binary Id="CustomActionBinary" SourceFile="$(var.SMTPUtilitySetup.Custom.TargetDir)$(var.SMTPUtilitySetup.Custom.TargetName).CA.dll" />
+		<CustomAction Id="RunPreviledgeCustomAction" BinaryKey="CustomActionBinary" DllEntry="CustomAction1" Execute="immediate" Return="check" />
+	</Fragment>
 
 	<Fragment>
 		<!--Desktop Shortcut-->
