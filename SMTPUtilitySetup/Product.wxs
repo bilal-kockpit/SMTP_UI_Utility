@@ -12,6 +12,7 @@
 		<!-- Add installer icon -->
 		<Icon Id="ShortCutIcon" SourceFile="$(var.ProjectDir)\logo.ico" />
 		<Property Id="ARPPRODUCTICON" Value="ShortCutIcon" />
+		<Property Id="MSIUSEREALADMINDETECTION" Value="1" />
 		
 		<!--<WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\License.rtf" />-->
 		<WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)\K2.png" />
