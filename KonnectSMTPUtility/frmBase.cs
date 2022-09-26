@@ -28,8 +28,8 @@ namespace KonnectSMTPUtility
                 //Method 1. center at initilization
                 //Method 2. The manual way                
                 ///btnUpdate.Visible = false;
-                lblCheckVersion.Text = "";
-                lblVersion.Text = "";
+              //  lblCheckVersion.Text = "";
+                //lblVersion.Text = "";
 
                 //code to check service is running
                 //code to get access token 
@@ -39,8 +39,6 @@ namespace KonnectSMTPUtility
             {
             }
         }
-
-
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -149,8 +147,7 @@ namespace KonnectSMTPUtility
             else 
             {
                 return true;
-            }
-                
+            }              
 
         }
 
@@ -181,7 +178,7 @@ namespace KonnectSMTPUtility
                 }
                 else
                 {
-                    MessageBox.Show(result, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Service is not Starting", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
 
                 }               
@@ -189,7 +186,7 @@ namespace KonnectSMTPUtility
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Please run the application as an administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                
             }            
 
@@ -247,6 +244,7 @@ namespace KonnectSMTPUtility
             {
                 ServiceController sc = new ServiceController(strServiceName);
                 string ServiceStatus = string.Empty;
+                var temp = sc.Status.ToString();
                 switch (sc.Status)
                 {
                     case ServiceControllerStatus.Running:
@@ -283,17 +281,15 @@ namespace KonnectSMTPUtility
         }
 
         private void btnInstall_Click(object sender, EventArgs e)
-        {
-            bool lretval = true;
+        {            
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                string result = ServiceManager.RunScript("SC.exe create " + Constants.ServiceName + " binpath=" + Constants.asmPath + " start=auto");
+                string result = ServiceManager.RunScript("SC.exe create " + Constants.ServiceName + " binpath='" + Constants.asmPath + "' start=auto");
                 if (result.Contains("Access is denied"))
                 {
                     MessageBox.Show("Please run the application as an administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    lretval = false;
-                    
+                                      
                 }
                 else if(result.Contains("The specified service already exists"))
                 {
@@ -309,7 +305,7 @@ namespace KonnectSMTPUtility
          
             catch (Exception ex)
             {
-                MessageBox.Show("Please run the application as an administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
             }
             Cursor.Current = Cursors.Default;            
@@ -320,13 +316,18 @@ namespace KonnectSMTPUtility
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                string result = string.Empty; 
-                
+                string result = string.Empty;               
+
                     if (IsServiceRunning(Constants.ServiceName).Item2 == "Stopped")
                     {
                         result = ServiceManager.RunScript("SC.exe delete " + Constants.ServiceName);
                         MessageBox.Show(result, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         EnableControls();
+                    }
+                    else if (IsServiceRunning(Constants.ServiceName).Item2.Contains("Service WorkerService1 was not found on computer"))
+                    {
+                    result = IsServiceRunning(Constants.ServiceName).Item2;
+                    MessageBox.Show("Service was not found on Computer,please install it first", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else if (IsServiceRunning(Constants.ServiceName).Item2 == "Running" || IsServiceRunning(Constants.ServiceName).Item2 == "Starting")
                     {
@@ -352,7 +353,7 @@ namespace KonnectSMTPUtility
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Please run the application as an administrator", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Cursor.Current = Cursors.Default;            
         
@@ -398,9 +399,12 @@ namespace KonnectSMTPUtility
             }   
         }
 
-       
+        private void frmBase_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
-     class Constants
+    class Constants
     {
         public static string DirectoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"Resources", "Service");
         public static string asmPath = Path.Combine(DirectoryPath, "WorkerService1.exe");

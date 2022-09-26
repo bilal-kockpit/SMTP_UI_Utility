@@ -31,7 +31,6 @@ namespace KonnectSMTPUtility
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBase));
-            this.lblCheckVersion = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,7 +50,6 @@ namespace KonnectSMTPUtility
             this.btnStart = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnStop = new System.Windows.Forms.Button();
-            this.lblVersion = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -62,17 +60,6 @@ namespace KonnectSMTPUtility
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblCheckVersion
-            // 
-            this.lblCheckVersion.AutoSize = true;
-            this.lblCheckVersion.Font = new System.Drawing.Font("Calibri", 12F);
-            this.lblCheckVersion.ForeColor = System.Drawing.Color.Red;
-            this.lblCheckVersion.Location = new System.Drawing.Point(3, 274);
-            this.lblCheckVersion.Name = "lblCheckVersion";
-            this.lblCheckVersion.Size = new System.Drawing.Size(21, 19);
-            this.lblCheckVersion.TabIndex = 13;
-            this.lblCheckVersion.Text = "...";
             // 
             // label2
             // 
@@ -93,7 +80,6 @@ namespace KonnectSMTPUtility
             this.panel2.Controls.Add(this.txtPasssword);
             this.panel2.Controls.Add(this.txtEmail);
             this.panel2.Controls.Add(this.txtPort);
-            this.panel2.Controls.Add(this.lblCheckVersion);
             this.panel2.Controls.Add(this.txtHost);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.txtAccessToken);
@@ -206,9 +192,9 @@ namespace KonnectSMTPUtility
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblServiceStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 48);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 53);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(531, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(533, 22);
             this.statusStrip1.TabIndex = 14;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -229,7 +215,7 @@ namespace KonnectSMTPUtility
             this.btnUninstall.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold);
             this.btnUninstall.ForeColor = System.Drawing.Color.White;
             this.btnUninstall.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUninstall.Location = new System.Drawing.Point(21, 11);
+            this.btnUninstall.Location = new System.Drawing.Point(23, 11);
             this.btnUninstall.Name = "btnUninstall";
             this.btnUninstall.Size = new System.Drawing.Size(118, 25);
             this.btnUninstall.TabIndex = 13;
@@ -247,7 +233,7 @@ namespace KonnectSMTPUtility
             this.btnInstall.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold);
             this.btnInstall.ForeColor = System.Drawing.Color.White;
             this.btnInstall.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnInstall.Location = new System.Drawing.Point(145, 11);
+            this.btnInstall.Location = new System.Drawing.Point(147, 11);
             this.btnInstall.Name = "btnInstall";
             this.btnInstall.Size = new System.Drawing.Size(118, 25);
             this.btnInstall.TabIndex = 13;
@@ -265,7 +251,7 @@ namespace KonnectSMTPUtility
             this.btnStart.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold);
             this.btnStart.ForeColor = System.Drawing.Color.White;
             this.btnStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStart.Location = new System.Drawing.Point(268, 11);
+            this.btnStart.Location = new System.Drawing.Point(270, 11);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(118, 25);
             this.btnStart.TabIndex = 12;
@@ -282,9 +268,9 @@ namespace KonnectSMTPUtility
             this.panel3.Controls.Add(this.btnInstall);
             this.panel3.Controls.Add(this.btnStart);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 353);
+            this.panel3.Location = new System.Drawing.Point(0, 364);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(531, 70);
+            this.panel3.Size = new System.Drawing.Size(533, 75);
             this.panel3.TabIndex = 7;
             // 
             // btnStop
@@ -297,7 +283,7 @@ namespace KonnectSMTPUtility
             this.btnStop.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold);
             this.btnStop.ForeColor = System.Drawing.Color.White;
             this.btnStop.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnStop.Location = new System.Drawing.Point(392, 11);
+            this.btnStop.Location = new System.Drawing.Point(394, 11);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(118, 25);
             this.btnStop.TabIndex = 15;
@@ -305,26 +291,14 @@ namespace KonnectSMTPUtility
             this.btnStop.UseVisualStyleBackColor = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Font = new System.Drawing.Font("Calibri", 12F);
-            this.lblVersion.ForeColor = System.Drawing.Color.White;
-            this.lblVersion.Location = new System.Drawing.Point(183, 32);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(21, 19);
-            this.lblVersion.TabIndex = 3;
-            this.lblVersion.Text = "...";
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(190)))), ((int)(((byte)(255)))));
-            this.panel1.Controls.Add(this.lblVersion);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(531, 56);
+            this.panel1.Size = new System.Drawing.Size(533, 56);
             this.panel1.TabIndex = 6;
             // 
             // pictureBox1
@@ -345,7 +319,7 @@ namespace KonnectSMTPUtility
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(531, 423);
+            this.ClientSize = new System.Drawing.Size(533, 439);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
@@ -353,6 +327,7 @@ namespace KonnectSMTPUtility
             this.Name = "frmBase";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configurator Gateway";
+            this.Load += new System.EventHandler(this.frmBase_Load_1);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -360,7 +335,6 @@ namespace KonnectSMTPUtility
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
@@ -368,7 +342,7 @@ namespace KonnectSMTPUtility
         }
 
         #endregion
-        private System.Windows.Forms.Label lblCheckVersion;
+        //private System.Windows.Forms.Label lblCheckVersion;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox txtHost;
@@ -381,7 +355,7 @@ namespace KonnectSMTPUtility
         private System.Windows.Forms.Button btnInstall;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label lblVersion;
+        //private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label5;
