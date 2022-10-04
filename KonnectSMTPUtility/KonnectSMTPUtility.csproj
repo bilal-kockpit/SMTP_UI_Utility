@@ -183,18 +183,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Resources\Service\appsettings.Development.json">
+    <Content Include="Resources\Service\appsettings.Development.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Service\appsettings.json">
+    </Content>
+    <Content Include="Resources\Service\appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Service\WorkerService1.deps.json">
+    </Content>
+    <Content Include="Resources\Service\WorkerService1.deps.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\Service\WorkerService1.runtimeconfig.json">
+    </Content>
+    <Content Include="Resources\Service\WorkerService1.runtimeconfig.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
