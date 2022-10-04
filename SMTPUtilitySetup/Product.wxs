@@ -188,6 +188,23 @@
 	    <Component Id="Resources_Service_Microsoft.Extensions.Configuration.Abstractions.dll" Guid="3314bfd7-4356-41ef-8815-79ee9e78f607">
 	      <File Id="Resources_Service_Microsoft.Extensions.Configuration.Abstractions.dll" Name="Microsoft.Extensions.Configuration.Abstractions.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Configuration.Abstractions.dll" />
 	    </Component>
+		  
+			<!--added by tester-->  		  
+		  <Component Id="Resources_Service_appsettings.json" Guid="b8c633c0-ffb0-45b7-8634-cacd4f804dfc">
+	      <File Id="Resources_Service_appsettings.json" Name="appsettings.json" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\appsettings.json" />
+	    </Component>		  
+			<Component Id="Resources_Service_appsettings.Development.json" Guid="91408e86-687c-4694-9365-02f101f72e2d">
+	      <File Id="Resources_Service_appsettings.Development.json" Name="appsettings.Development.json" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\appsettings.Development.json" />
+	    </Component>  
+		  <Component Id="Resources_Service_WorkerService1.deps.json" Guid="e19ffe70-c352-4edc-9ead-575d240602c4">
+	      <File Id="Resources_Service_WorkerService1.deps.json" Name="WorkerService1.deps.json" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\WorkerService1.deps.json" />
+	    </Component>
+		  <Component Id="Resources_Service_WorkerService1.runtimeconfig.json" Guid="241672ae-e0f6-4bce-89a3-cd13a17d9374">
+	      <File Id="Resources_Service_WorkerService1.runtimeconfig.json" Name="WorkerService1.runtimeconfig.json" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\WorkerService1.runtimeconfig.json" />
+	    </Component>
+		  <!--added by tester--> 
+		  
+		  
 	    <Component Id="Resources_Service_Microsoft.Extensions.Configuration.Binder.dll" Guid="f19a8b5d-063e-4a80-9ff5-2fca6eba4d20">
 	      <File Id="Resources_Service_Microsoft.Extensions.Configuration.Binder.dll" Name="Microsoft.Extensions.Configuration.Binder.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\Microsoft.Extensions.Configuration.Binder.dll" />
 	    </Component>
@@ -305,7 +322,7 @@
         <File Id="Resources_Service_runtimes_unix_lib_netcoreapp2.1_System.Security.Principal.Windows.dll" Name="System.Security.Principal.Windows.dll" Source="$(var.KonnectSMTPUtility_TargetDir)Resources\Service\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll" />
       </Component>
     </ComponentGroup>
-  </Fragment>
+  </Fragment>		
 
 	<Fragment>
 		<Binary Id="CustomActionBinary" SourceFile="$(var.SMTPUtilitySetup.Custom.TargetDir)$(var.SMTPUtilitySetup.Custom.TargetName).CA.dll" />
