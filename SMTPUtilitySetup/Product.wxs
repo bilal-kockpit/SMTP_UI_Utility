@@ -18,6 +18,8 @@
 		<!--<WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\License.rtf" />-->
 		<WixVariable Id="WixUIDialogBmp" Value="$(var.ProjectDir)\K2.png" />
 		<WixVariable Id="WixUIBannerBmp" Value="$(var.ProjectDir)\K1.png" />
+		<WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\test.rtf" />
+		
 
 		<Feature Id="ProductFeature" Title="KonnectSMTP" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
